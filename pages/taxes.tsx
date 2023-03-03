@@ -13,6 +13,7 @@ import HolidayTimeLineYear from '@/features/Income/Components/HolidayTimeline';
 import HolidayAndVacation from '@/features/Income/Components/HolidayAndVacation';
 import { useEffect, useState } from 'react';
 import { useAppContext } from '@/context/AppContext';
+import { ICompanyFinanceResponse } from './api/Company';
 import { IPersonalIncomeResponse } from './api/Personal';
 
 
@@ -59,7 +60,7 @@ export default function TaxPage() {
       })
     })
       .then((res) => res.json())
-      .then((data => {
+      .then(((data: ICompanyFinanceResponse) => {
         updateCompanyFinance(data.companyIncome);
         setLoading(false);
       }))
@@ -126,7 +127,7 @@ export default function TaxPage() {
                       <Salary />
                     </div>
                     <div className={classes.contentContainer}>
-                      {/* <SalaryMonthly /> */}
+                      <SalaryMonthly />
                     </div>
                     <div className={classes.contentContainer}>
                       <Dividend />

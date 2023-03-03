@@ -9,6 +9,7 @@ import { _profit } from "../Helpers/profit.helpers"
 const Profit = () => {
 
   const { general, companyFinance } = useAppContext();
+  console.log(companyFinance)
 
   return (
     <>
@@ -17,7 +18,7 @@ const Profit = () => {
       </Group>
       <Group sx={{ 'display': 'flex', 'justify-content': 'space-between' }}>
         <Text fz="md">Netto omsetning</Text>
-        <Text fz="sm">{_formatNumber(companyFinance.companyProfit.netTurnover)}</Text>
+        <Text fz="sm">{_formatNumber(companyFinance.companyTurnover.netTurnover)}</Text>
       </Group>
       <Group sx={{ 'display': 'flex', 'justify-content': 'space-between' }}>
         <Text fz="md">Lønn</Text>

@@ -1,3 +1,4 @@
+import { API_URL } from "@/constants/api";
 import IPersonalIncome from "@/features/Income/Models/Api/PersonalIncome";
 import { NextApiRequest, NextApiResponse } from "next";
 
@@ -12,7 +13,7 @@ export default async function handler(
   res: NextApiResponse<IPersonalIncomeResponse>
 ) {
   // console.log('Personal income API called.')
-  let incomeResponse = await fetch('http://localhost:5258/income/personal', {
+  let incomeResponse = await fetch(`${API_URL}/income/personal`, {
     method: req.method,
     headers: {
       'Content-Type': 'application/json'

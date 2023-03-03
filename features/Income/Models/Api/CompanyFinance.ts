@@ -13,7 +13,7 @@ interface CompanyTurnover {
 }
 
 interface CompanyProfit {
-  netTurnover: number;
+  // netTurnover: number;
   pension: number;
   employerTaxPension: number;
   employerTaxSalary: number;
@@ -34,7 +34,7 @@ interface CompanyResult {
 
 
 export const profitValues: CompanyProfit = {
-  netTurnover: 0,
+  // netTurnover: 0,
   pension: 0,
   employerTaxSalary: 0,
   employerTaxPension: 0,

@@ -24,7 +24,7 @@ const ResultWithDividend = () => {
       </Group>
       <Group sx={{ 'display': 'flex', 'justify-content': 'space-between' }}>
         <Text fz="md">Utbytte</Text>
-        <Text fz="sm">- {_formatNumber(companyFinance.companyResult.dividend)}</Text>
+        <Text fz="sm">- {_formatNumber(general.dividend)}</Text>
       </Group>
 
 

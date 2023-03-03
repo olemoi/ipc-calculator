@@ -26,7 +26,7 @@ const LeaveOutput = () => {
     const fromTodayQuery = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`
 
     setLoading(true);
-    fetch(`${API_URL}/businessDays?fromDate=${fromDateQuery}&toDate=${toDateQuery}`)
+    fetch(`/api/businessDays?fromDate=${fromDateQuery}&toDate=${toDateQuery}`)
       .then((res) => res.json())
       .then((data) => {
         setBusinessDaysDuringLeave(data);
