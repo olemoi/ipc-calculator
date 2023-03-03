@@ -8,8 +8,7 @@ import { _salaryAfterTax, _salaryTax } from "../Helpers/income.helpers";
 
 const SalaryMonthly = () => {
 
-  const { general } = useAppContext();
-  const monthlySalary = general.salary / 12;
+  const { personalIncome } = useAppContext();
 
   return (
     <>
@@ -18,18 +17,18 @@ const SalaryMonthly = () => {
       </Group>
       <Group sx={{ 'display': 'flex', 'justify-content': 'space-between' }}>
         <Text fz="md">Brutto lønn</Text>
-        <Text fz="sm">{_formatNumber(monthlySalary)}</Text>
+        <Text fz="sm">{_formatNumber(personalIncome?.monthlySalary)}</Text>
       </Group>
       <Group sx={{ 'display': 'flex', 'justify-content': 'space-between' }}>
         <Text fz="md">Skatt på lønn</Text>
-        <Text fz="sm">- {_formatNumber(_salaryTax(monthlySalary, general.salaryTaxRate))}</Text>
+        <Text fz="sm">- {_formatNumber(personalIncome?.personalIncomeTax.sumMonthlyTax)}</Text>
       </Group>
 
 
       <Divider />
       <Group py='.25rem' sx={{ 'display': 'flex', 'justify-content': 'space-between' }}>
         <Text fz="md">Utbetalt lønn</Text>
-        <Text fz="sm">= {_formatNumber(_salaryAfterTax(monthlySalary, general.salaryTaxRate))}</Text>
+        <Text fz="sm">= {_formatNumber(personalIncome?.monthlySalary - personalIncome?.personalIncomeTax.sumMonthlyTax)}</Text>
       </Group>
       <Divider />
     </>

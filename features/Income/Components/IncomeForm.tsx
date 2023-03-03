@@ -8,7 +8,7 @@ import { useState } from "react";
 
 
 const IncomeForm = () => {
-  const { general, updateGeneral } = useAppContext();
+  const { general, updateGeneral, companyFinance } = useAppContext();
   const { common, updateCommon } = useAppContext();
   const [calendarOpen, setCalendarOpen] = useState<boolean>(false);
   const theme = useMantineTheme();
@@ -18,7 +18,7 @@ const IncomeForm = () => {
   const workHoursDesc = () => {
     return (
       <Text>
-        <div ref={ref} style={hovered ? { 'cursor': 'pointer', 'textDecoration': 'underline', 'display': 'inline' } : { 'display': 'inline' }} onClick={() => updateGeneral({ ...general, yearlyWorkHours: common.totalBusinessDays * 7.5 })}>Sett til resterende arbeidstimer i inneværende år</div>
+        <div ref={ref} style={hovered ? { 'cursor': 'pointer', 'textDecoration': 'underline', 'display': 'inline' } : { 'display': 'inline' }} onClick={() => updateGeneral({ ...general, overrideWorkHours: true })}>Sett til resterende arbeidstimer i inneværende år</div>
       </Text >
     )
   }
@@ -42,7 +42,7 @@ const IncomeForm = () => {
             }
 
 
-            updateGeneral({ ...general, yearlyWorkHours: temp })
+            updateGeneral({ ...general, yearlyWorkHours: temp, overrideWorkHours: false })
           }
           }
         />

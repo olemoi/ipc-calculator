@@ -3,17 +3,40 @@ import { Text, Title, Grid, Divider, Container, Group } from '@mantine/core';
 import IncomeForm from '@/features/Income/Components/IncomeForm';
 import useStyles from '@/styles/custom/InputStyles';
 import Turnover from '@/features/Income/Components/Turnover';
-import Profit1 from '@/features/Income/Components/Profit1';
+import Profit from '@/features/Income/Components/Profit';
 import Result from '@/features/Income/Components/Result';
 import ResultWithDividend from '@/features/Income/Components/ResultAfterDividend';
 import Salary from '@/features/Income/Components/Salary';
 import SalaryMonthly from '@/features/Income/Components/SalaryMonthly';
-import Dividend1 from '@/features/Income/Components/Dividend1';
+import Dividend from '@/features/Income/Components/Dividend';
 import HolidayTimeLine from '@/features/ParentalLeave/Components/ParentalLeaveTimeline';
 import HolidayTimeLineYear from '@/features/Income/Components/HolidayTimeline';
 import HolidayAndVacation from '@/features/Income/Components/HolidayAndVacation';
+import { useEffect, useState } from 'react';
+import { useAppContext } from '@/context/AppContext';
 export default function Home() {
 
+  const [loading, setLoading] = useState(false);
+  const { updatePersonalIncome } = useAppContext();
+
+  useEffect(() => {
+    setLoading(true);
+    fetch('/api/Personal', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        "salary": 1000000,
+        "dividend": 0
+      })
+    })
+      .then((res) => res.json())
+      .then((data => {
+        updatePersonalIncome(data.personalIncome)
+        setLoading(false);
+      }))
+  }, []);
 
   const { classes } = useStyles();
   return (
@@ -49,7 +72,7 @@ export default function Home() {
                       <Turnover />
                     </div>
                     <div className={classes.contentContainer}>
-                      <Profit1 />
+                      <Profit />
                     </div>
                     <div className={classes.contentContainer}>
                       <Result />
@@ -68,7 +91,7 @@ export default function Home() {
                       <SalaryMonthly />
                     </div>
                     <div className={classes.contentContainer}>
-                      <Dividend1 />
+                      <Dividend />
                     </div>
                     <div className={classes.contentContainer}>
                       <HolidayAndVacation />

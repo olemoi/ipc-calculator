@@ -1,24 +1,38 @@
+
+
+import { UTBYTTESKATT } from "@/constants/tax-rates";
 import { useAppContext } from "@/context/AppContext"
 import { _formatNumber } from "@/features/Common/Helpers/common.helpers";
-import { Group, Text } from "@mantine/core"
-import { _dividendAfterTax } from "../Helpers/dividend.helpers";
+import { Text, Divider, Group } from "@mantine/core";
+import { _salaryAfterTax, _salaryTax } from "../Helpers/income.helpers";
+
 
 
 const Dividend = () => {
 
-
-  const { general } = useAppContext();
+  const { personalIncome } = useAppContext();
 
   return (
     <>
       <Group sx={{ 'display': 'flex', 'justify-content': 'space-between' }}>
-        <Text fz="md">Utbytte</Text>
-        <Text fz="sm">{_formatNumber(general.dividend)} ,-</Text>
+        <Text fz="md" pb='.5rem' style={{ 'fontSize': 20 }}>Utbytte</Text>
       </Group>
       <Group sx={{ 'display': 'flex', 'justify-content': 'space-between' }}>
-        <Text fz="md">Utbytte etter skatt</Text>
-        <Text fz="sm">{_formatNumber(_dividendAfterTax(general.dividend))} ,-</Text>
+        <Text fz="md">Brutto utbytte</Text>
+        <Text fz="sm">{_formatNumber(personalIncome?.dividend)}</Text>
       </Group>
+      <Group sx={{ 'display': 'flex', 'justify-content': 'space-between' }}>
+        <Text fz="md">Skatt på utbytte</Text>
+        <Text fz="sm">- {_formatNumber(personalIncome?.dividendTax)}</Text>
+      </Group>
+
+
+      <Divider />
+      <Group py='.25rem' sx={{ 'display': 'flex', 'justify-content': 'space-between' }}>
+        <Text fz="md">Utbetalt utbytte</Text>
+        <Text fz="sm">= {_formatNumber(personalIncome?.dividend - personalIncome?.dividendTax)}</Text>
+      </Group>
+      <Divider />
     </>
   )
 }

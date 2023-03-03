@@ -36,7 +36,7 @@ const HolidayTimeLineYear = () => {
       <Timeline>
         {values.map(x => {
           return (
-            <Timeline.Item title={x.title}>
+            <Timeline.Item key={x.date} title={x.title}>
               {x.date}
             </Timeline.Item>
           )

@@ -9,10 +9,8 @@ import { _profit, _profitAfterTax, _taxOnProfit } from "../Helpers/profit.helper
 const Result = () => {
 
 
-  const { general } = useAppContext();
-  let netTurnover = _netTurnover(general.yearlyWorkHours, general.hourlyRate, general.brokerComission)
-  let pension = _pension(general.salary, general.pensionPercentage)
-  let profit = _profit(netTurnover, general.salary, pension, general.generalExpenses)
+  const { general, companyFinance } = useAppContext();
+
 
 
   return (
@@ -22,18 +20,18 @@ const Result = () => {
       </Group>
       <Group sx={{ 'display': 'flex', 'justify-content': 'space-between' }}>
         <Text fz="md">Overskudd</Text>
-        <Text fz="sm">{_formatNumber(profit)}</Text>
+        <Text fz="sm">{_formatNumber(companyFinance.companyResult.profit)}</Text>
       </Group>
       <Group sx={{ 'display': 'flex', 'justify-content': 'space-between' }}>
         <Text fz="md">Selskapsskatt</Text>
-        <Text fz="sm">- {_formatNumber(_taxOnProfit(profit))}</Text>
+        <Text fz="sm">- {_formatNumber(companyFinance.companyResult.profitTax)}</Text>
       </Group>
 
 
       <Divider />
       <Group py='.25rem' sx={{ 'display': 'flex', 'justify-content': 'space-between' }}>
         <Text fz="md">Resultat etter skatt</Text>
-        <Text fz="sm">= {_formatNumber(_profitAfterTax(profit))}</Text>
+        <Text fz="sm">= {_formatNumber(companyFinance.companyResult.profitAfterTax)}</Text>
       </Group>
       <Divider />
     </>

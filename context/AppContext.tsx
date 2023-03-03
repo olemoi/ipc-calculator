@@ -1,5 +1,7 @@
 import { defaultCommonValues, ICommonInformation } from "@/features/Common/Context/CommonContext";
 import { defaultGeneralValues, IGeneralInformation } from "@/features/Income/Context/IncomeContext";
+import ICompanyFinance, { defaultCompanyFinanceValues } from "@/features/Income/Models/Api/CompanyFinance";
+import IPersonalIncome, { defaultPersonalIncomeValues } from "@/features/Income/Models/Api/PersonalIncome";
 import { defaultFinancialValues, IFinancialInformation } from "@/features/ParentalLeave/Context/FinancialsContext";
 import { defaultCalcValues, ICalculatedLeaveValues } from "@/features/ParentalLeave/Context/LeaveCalculationContext";
 import { defaultLeaveValues, IParentalLeaveInformation } from "@/features/ParentalLeave/Context/LeaveContext";
@@ -13,8 +15,12 @@ interface IAppProps {
   leaveCalculations: ICalculatedLeaveValues,
   financials: IFinancialInformation,
   common: ICommonInformation,
+  personalIncome: IPersonalIncome,
+  companyFinance: ICompanyFinance,
 
-  updateGeneral: (values: IGeneralInformation) => void
+  updateCompanyFinance: (values: ICompanyFinance) => void,
+  updatePersonalIncome: (values: IPersonalIncome) => void,
+  updateGeneral: (values: IGeneralInformation) => void,
   updateLeave: (values: IParentalLeaveInformation) => void,
   updateFinancials: (values: IFinancialInformation) => void,
   updateCommon: (values: ICommonInformation) => void,
@@ -27,6 +33,11 @@ const defaultAppProps: IAppProps = {
   leaveCalculations: defaultCalcValues,
   financials: defaultFinancialValues,
   common: defaultCommonValues,
+  personalIncome: defaultPersonalIncomeValues,
+  companyFinance: defaultCompanyFinanceValues,
+
+  updateCompanyFinance: () => { },
+  updatePersonalIncome: () => { },
   updateGeneral: () => { },
   updateLeave: () => { },
   updateFinancials: () => { },
@@ -54,6 +65,8 @@ export const AppContextProvider = ({ children }: Props) => {
   const [leaveCalc, setLeaveCalc] = useState<ICalculatedLeaveValues>(defaultCalcValues);
   const [financials, setFinancials] = useState<IFinancialInformation>(defaultFinancialValues);
   const [common, setCommon] = useState<ICommonInformation>(defaultCommonValues);
+  const [personalIncome, setPersonalIncome] = useState<IPersonalIncome>(defaultPersonalIncomeValues);
+  const [companyFinance, setCompanyFinance] = useState<ICompanyFinance>(defaultCompanyFinanceValues);
 
 
   const updateFinancials = (values: IFinancialInformation) => {
@@ -66,6 +79,15 @@ export const AppContextProvider = ({ children }: Props) => {
 
   const updateCommon = (values: ICommonInformation) => {
     setCommon(values)
+  }
+
+  const updatePersonalIncome = (values: IPersonalIncome) => {
+    setPersonalIncome(values)
+  }
+
+
+  const updateCompanyFinance = (values: ICompanyFinance) => {
+    setCompanyFinance(values)
   }
 
   const updateLeave = (values: IParentalLeaveInformation) => {
@@ -86,6 +108,10 @@ export const AppContextProvider = ({ children }: Props) => {
     updateGeneral: updateGeneral,
     leave: leave,
     common: common,
+    personalIncome: personalIncome,
+    companyFinance: companyFinance,
+    updateCompanyFinance: updateCompanyFinance,
+    updatePersonalIncome: updatePersonalIncome,
     updateLeave: updateLeave,
     updateFinancials: updateFinancials,
     updateCommon: updateCommon,

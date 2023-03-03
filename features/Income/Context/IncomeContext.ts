@@ -8,6 +8,7 @@ export interface IGeneralInformation {
   brokerComission: number;
   dividend: number;
   pensionPercentage: number;
+  overrideWorkHours: boolean;
 }
 
 
@@ -21,4 +22,5 @@ export const defaultGeneralValues: IGeneralInformation = {
   brokerComission: 0,
   dividend: 0,
   pensionPercentage: 0,
+  overrideWorkHours: false,
 };

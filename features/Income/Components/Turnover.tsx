@@ -7,10 +7,8 @@ import { _pension, _result, _turnover } from "../Helpers/income.helpers";
 const Turnover = () => {
 
 
-  const { general } = useAppContext();
+  const { companyFinance } = useAppContext();
 
-  const turnover = _turnover(general.yearlyWorkHours, general.hourlyRate)
-  const comission = turnover * general.brokerComission / 100;
 
   return (
     <>
@@ -19,16 +17,16 @@ const Turnover = () => {
       </Group>
       <Group sx={{ 'display': 'flex', 'justify-content': 'space-between' }}>
         <Text fz="md">Brutto Omsetning</Text>
-        <Text fz="sm">{_formatNumber(turnover)}</Text>
+        <Text fz="sm">{_formatNumber(companyFinance.companyTurnover.grossTurnover)}</Text>
       </Group>
       <Group sx={{ 'display': 'flex', 'justify-content': 'space-between' }}>
         <Text fz="md">Provisjon</Text>
-        <Text fz="sm">- {_formatNumber(comission)}</Text>
+        <Text fz="sm">- {_formatNumber(companyFinance.companyTurnover.brokerCommission)}</Text>
       </Group>
       <Divider />
       <Group py='.25rem' sx={{ 'display': 'flex', 'justify-content': 'space-between' }}>
         <Text fz="md">Netto Omsetning</Text>
-        <Text fz="sm">= {_formatNumber(turnover - comission)}</Text>
+        <Text fz="sm">= {_formatNumber(companyFinance.companyTurnover.netTurnover)}</Text>
       </Group>
       <Divider />
     </>
